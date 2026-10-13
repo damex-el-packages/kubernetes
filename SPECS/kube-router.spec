@@ -28,7 +28,7 @@ go build -C cmd/kube-router -o $(pwd)/kube-router
 %{__install} -d %{buildroot}%{_sysconfdir}/default
 %{__install} -d %{buildroot}%{_sysconfdir}/kube-router
 %{__install} -m 755 kube-router %{buildroot}%{_bindir}/kube-router
-cat <<EOF > %{buildroot}%{_unitdir}/kube-router.service
+%{__cat} <<EOF > %{buildroot}%{_unitdir}/kube-router.service
 [Unit]
 Description=a turnkey solution for Kubernetes networking
 Documentation=%{url}
@@ -50,7 +50,7 @@ Slice=kubernetes.slice
 WantedBy=multi-user.target
 EOF
 
-cat <<EOF > %{buildroot}%{_sysconfdir}/default/kube-router
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/default/kube-router
 ARGUMENTS=""
 EOF
 

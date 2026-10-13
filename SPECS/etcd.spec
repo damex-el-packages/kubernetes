@@ -72,7 +72,7 @@ go build -C tools/etcd-dump-metrics -o $(pwd)/etcd-dump-metrics
 %{__install} -m 755 etcd-dump-db %{buildroot}%{_bindir}/etcd-dump-db
 %{__install} -m 755 etcd-dump-logs %{buildroot}%{_bindir}/etcd-dump-logs
 %{__install} -m 755 etcd-dump-metrics %{buildroot}%{_bindir}/etcd-dump-metrics
-cat <<EOF > %{buildroot}%{_unitdir}/etcd.service
+%{__cat} <<EOF > %{buildroot}%{_unitdir}/etcd.service
 [Unit]
 Description=distributed key-value store
 Documentation=https://etcd.io
@@ -93,14 +93,14 @@ StartLimitBurst=0
 [Install]
 WantedBy=multi-user.target
 EOF
-cat <<EOF > %{buildroot}%{_sysconfdir}/default/etcd
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/default/etcd
 ARGUMENTS="--data-dir=%{_sharedstatedir}/etcd"
 EOF
-cat <<EOF > %{buildroot}%{_sysconfdir}/etcd/etcd.yml
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/etcd/etcd.yml
 ---
 EOF
 %{__install} -d %{buildroot}%{_sysusersdir}
-cat <<EOF > %{buildroot}%{_sysusersdir}/etcd.conf
+%{__cat} <<EOF > %{buildroot}%{_sysusersdir}/etcd.conf
 u etcd - "etcd" %{_sharedstatedir}/etcd /sbin/nologin
 EOF
 

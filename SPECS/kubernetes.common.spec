@@ -77,7 +77,7 @@ go build -C cmd/kubectl-convert -o $(pwd)/kubectl-convert
 %{__install} -m 755 kubelet %{buildroot}%{_bindir}/kubelet
 %{__install} -m 755 kubectl %{buildroot}%{_bindir}/kubectl
 %{__install} -m 755 kubectl-convert %{buildroot}%{_bindir}/kubectl-convert
-cat <<EOF > %{buildroot}%{_unitdir}/kube-apiserver.service
+%{__cat} <<EOF > %{buildroot}%{_unitdir}/kube-apiserver.service
 [Unit]
 Description=Kubernetes API server
 Documentation=https://kubernetes.io
@@ -101,7 +101,7 @@ Slice=kubernetes.slice
 WantedBy=multi-user.target
 EOF
 
-cat <<EOF > %{buildroot}%{_unitdir}/kube-controller-manager.service
+%{__cat} <<EOF > %{buildroot}%{_unitdir}/kube-controller-manager.service
 [Unit]
 Description=kube-controller-manager
 Documentation=https://kubernetes.io
@@ -123,7 +123,7 @@ Slice=kubernetes.slice
 WantedBy=multi-user.target
 EOF
 
-cat <<EOF > %{buildroot}%{_unitdir}/kube-proxy.service
+%{__cat} <<EOF > %{buildroot}%{_unitdir}/kube-proxy.service
 [Unit]
 Description=Kubernetes network proxy
 Documentation=https://kubernetes.io
@@ -143,7 +143,7 @@ Slice=kubernetes.slice
 WantedBy=multi-user.target
 EOF
 
-cat <<EOF > %{buildroot}%{_unitdir}/kube-scheduler.service
+%{__cat} <<EOF > %{buildroot}%{_unitdir}/kube-scheduler.service
 [Unit]
 Description=kube-scheduler
 Documentation=https://kubernetes.io
@@ -165,7 +165,7 @@ Slice=kubernetes.slice
 WantedBy=multi-user.target
 EOF
 
-cat <<EOF > %{buildroot}%{_unitdir}/kubelet.service
+%{__cat} <<EOF > %{buildroot}%{_unitdir}/kubelet.service
 [Unit]
 Description=the primary node agent
 Documentation=https://kubernetes.io
@@ -185,49 +185,49 @@ Slice=kubernetes.slice
 WantedBy=multi-user.target
 EOF
 
-cat <<EOF > %{buildroot}%{_sysconfdir}/default/kube-apiserver
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/default/kube-apiserver
 ARGUMENTS=""
 EOF
 
-cat <<EOF > %{buildroot}%{_sysconfdir}/default/kube-controller-manager
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/default/kube-controller-manager
 ARGUMENTS=""
 EOF
 
-cat <<EOF > %{buildroot}%{_sysconfdir}/default/kube-proxy
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/default/kube-proxy
 ARGUMENTS="--config=/etc/kubernetes/kube-proxy.yml"
 EOF
 
-cat <<EOF > %{buildroot}%{_sysconfdir}/default/kube-scheduler
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/default/kube-scheduler
 ARGUMENTS=""
 EOF
 
-cat <<EOF > %{buildroot}%{_sysconfdir}/default/kubelet
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/default/kubelet
 ARGUMENTS="--config=/etc/kubernetes/kubelet.yml"
 EOF
 
-cat <<EOF > %{buildroot}%{_sysconfdir}/kubernetes/kube-proxy.yml
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/kubernetes/kube-proxy.yml
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
 kind: KubeProxyConfiguration
 EOF
 
-cat <<EOF > %{buildroot}%{_sysconfdir}/kubernetes/kubelet.yml
+%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/kubernetes/kubelet.yml
 apiVersion: kubelet.config.k8s.io/v1beta1
 kind: KubeletConfiguration
 EOF
 %{__install} -d %{buildroot}%{_sysusersdir}
-cat <<EOF > %{buildroot}%{_sysusersdir}/kube-apiserver.conf
+%{__cat} <<EOF > %{buildroot}%{_sysusersdir}/kube-apiserver.conf
 u kubernetes - "kubernetes" %{_sharedstatedir}/kubernetes /sbin/nologin
 EOF
-cat <<EOF > %{buildroot}%{_sysusersdir}/kube-controller-manager.conf
+%{__cat} <<EOF > %{buildroot}%{_sysusersdir}/kube-controller-manager.conf
 u kubernetes - "kubernetes" %{_sharedstatedir}/kubernetes /sbin/nologin
 EOF
-cat <<EOF > %{buildroot}%{_sysusersdir}/kube-proxy.conf
+%{__cat} <<EOF > %{buildroot}%{_sysusersdir}/kube-proxy.conf
 u kubernetes - "kubernetes" %{_sharedstatedir}/kubernetes /sbin/nologin
 EOF
-cat <<EOF > %{buildroot}%{_sysusersdir}/kube-scheduler.conf
+%{__cat} <<EOF > %{buildroot}%{_sysusersdir}/kube-scheduler.conf
 u kubernetes - "kubernetes" %{_sharedstatedir}/kubernetes /sbin/nologin
 EOF
-cat <<EOF > %{buildroot}%{_sysusersdir}/kubelet.conf
+%{__cat} <<EOF > %{buildroot}%{_sysusersdir}/kubelet.conf
 u kubernetes - "kubernetes" %{_sharedstatedir}/kubernetes /sbin/nologin
 EOF
 
