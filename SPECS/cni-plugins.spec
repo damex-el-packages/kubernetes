@@ -5,7 +5,7 @@ Name: cni-plugins
 Version: 1.9.1
 Release: 1%{?dist}
 Summary: CNI network plugins
-License: ASL 2.0
+License: Apache-2.0
 URL: https://github.com/containernetworking/plugins
 Source: https://github.com/containernetworking/plugins/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Requires: cni-plugins-main = %{version}

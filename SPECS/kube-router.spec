@@ -4,7 +4,7 @@ Name: kube-router
 Version: 2.11.1
 Release: 1%{?dist}
 Summary: a turnkey solution for Kubernetes networking
-License: ASL 2.0
+License: Apache-2.0
 URL: https://www.kube-router.io
 Source: https://github.com/cloudnativelabs/kube-router/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 %{?systemd_requires}

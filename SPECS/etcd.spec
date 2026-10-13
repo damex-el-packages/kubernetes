@@ -4,7 +4,7 @@ Name: etcd
 Version: 3.6.8
 Release: 1%{?dist}
 Summary: distributed key-value store
-License: ASL 2.0
+License: Apache-2.0
 URL: https://etcd.io
 Source: https://github.com/etcd-io/etcd/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 %{?systemd_requires}

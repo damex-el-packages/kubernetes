@@ -4,7 +4,7 @@ Name: kubernetes
 Version: %{kubernetes_version}
 Release: 1%{?dist}
 Summary: open-source container orchestration system
-License: ASL 2.0
+License: Apache-2.0
 URL: https://kubernetes.io
 Source: https://github.com/kubernetes/kubernetes/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires: golang >= 1.26.0, golang < 1.27.0

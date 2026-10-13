@@ -4,7 +4,7 @@ Name: flannel
 Version: 0.28.1
 Release: 1%{?dist}
 Summary: simple and easy way to configure a layer 3 network fabric designed for Kubernetes
-License: ASL 2.0
+License: Apache-2.0
 URL: https://github.com/flannel-io/flannel
 Source: https://github.com/flannel-io/flannel/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires: golang >= 1.26.0, golang < 1.27.0
