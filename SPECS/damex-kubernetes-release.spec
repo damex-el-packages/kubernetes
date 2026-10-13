@@ -1,6 +1,4 @@
 %define debug_package %{nil}
-%define disttype %{expand:%%(/usr/lib/rpm/redhat/dist.sh --disttype)}
-%define distnum %{expand:%%(/usr/lib/rpm/redhat/dist.sh --distnum)}
 
 Name: damex-kubernetes-release
 Version: 0.3.0
@@ -8,6 +6,7 @@ Release: 1%{?dist}
 Summary: damex kubernetes repository configuration
 License: MIT
 URL: https://yum-repositories.damex.org
+BuildArch: noarch
 
 %description
 
@@ -17,10 +16,10 @@ URL: https://yum-repositories.damex.org
 
 %install
 %{__install} -d %{buildroot}%{_sysconfdir}/yum.repos.d
-%{__cat} <<EOF > %{buildroot}%{_sysconfdir}/yum.repos.d/damex-kubernetes.repo
+%{__cat} <<'EOF' > %{buildroot}%{_sysconfdir}/yum.repos.d/damex-kubernetes.repo
 [damex-kubernetes]
 name = damex-kubernetes
-baseurl = https://yum-repositories.damex.org/kubernetes/%{disttype}/%{distnum}/%{_arch}
+baseurl = https://yum-repositories.damex.org/kubernetes/el/$releasever/$basearch
 gpgcheck = 1
 repo_gpgcheck = 1
 gpgkey = https://yum-repositories.damex.org/kubernetes/kubernetes-2036-09-25.asc
