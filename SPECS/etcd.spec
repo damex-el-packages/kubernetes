@@ -81,7 +81,6 @@ User=etcd
 Group=etcd
 EnvironmentFile=%{_sysconfdir}/default/etcd
 ExecStart=%{_bindir}/etcd \$ARGUMENTS
-ExecReload=%{_bindir}/kill -HUP \$MAINPID
 SendSIGKILL=no
 OOMScoreAdjust=-1000
 Restart=always
