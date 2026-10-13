@@ -9,6 +9,7 @@ URL: https://yum-repositories.damex.org
 BuildArch: noarch
 
 %description
+This package contains the damex-kubernetes repository configuration.
 
 %prep
 
