@@ -1,5 +1,4 @@
 %define debug_package %{nil}
-%undefine source_date_epoch_from_changelog
 
 Name: flannel
 Version: 0.28.1

@@ -1,6 +1,5 @@
 %define debug_package %{nil}
 %define cni_bindir /opt/cni/bin
-%undefine source_date_epoch_from_changelog
 
 Name: cni-plugins
 Version: 1.9.1

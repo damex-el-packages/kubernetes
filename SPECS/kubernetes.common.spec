@@ -1,5 +1,4 @@
 %define debug_package %{nil}
-%undefine source_date_epoch_from_changelog
 
 Name: kubernetes
 Version: %{kubernetes_version}

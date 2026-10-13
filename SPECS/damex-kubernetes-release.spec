@@ -1,7 +1,6 @@
 %define debug_package %{nil}
 %define disttype %{expand:%%(/usr/lib/rpm/redhat/dist.sh --disttype)}
 %define distnum %{expand:%%(/usr/lib/rpm/redhat/dist.sh --distnum)}
-%undefine source_date_epoch_from_changelog
 
 Name: damex-kubernetes-release
 Version: 0.3.0
