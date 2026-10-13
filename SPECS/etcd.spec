@@ -87,6 +87,7 @@ Restart=always
 RestartSec=5s
 StartLimitInterval=0
 StartLimitBurst=0
+Type=notify
 
 [Install]
 WantedBy=multi-user.target
