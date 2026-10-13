@@ -28,3 +28,7 @@ go build -C cmd/helm -o $(pwd)/helm
 %files
 %defattr(-,root,root,-)
 %{_bindir}/helm
+
+%changelog
+* %(date -u +"%%a %%b %%d %%Y") Roman Kuzmitskii <el-packages@damex.org> - %{version}-%{release}
+- History: https://github.com/damex-el-packages/kubernetes/commits/production

@@ -69,3 +69,7 @@ EOF
 %{_bindir}/kube-router
 %{_unitdir}/kube-router.service
 %config(noreplace) %{_sysconfdir}/default/kube-router
+
+%changelog
+* %(date -u +"%%a %%b %%d %%Y") Roman Kuzmitskii <el-packages@damex.org> - %{version}-%{release}
+- History: https://github.com/damex-el-packages/kubernetes/commits/production

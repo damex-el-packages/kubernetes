@@ -149,3 +149,7 @@ EOF
 %files -n etcd-dump-metrics
 %defattr(-,root,root,-)
 %{_bindir}/etcd-dump-metrics
+
+%changelog
+* %(date -u +"%%a %%b %%d %%Y") Roman Kuzmitskii <el-packages@damex.org> - %{version}-%{release}
+- History: https://github.com/damex-el-packages/kubernetes/commits/production

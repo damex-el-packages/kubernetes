@@ -119,3 +119,7 @@ go build -C plugins/meta/vrf -o $(pwd)/vrf
 %{cni_bindir}/sbr
 %{cni_bindir}/tuning
 %{cni_bindir}/vrf
+
+%changelog
+* %(date -u +"%%a %%b %%d %%Y") Roman Kuzmitskii <el-packages@damex.org> - %{version}-%{release}
+- History: https://github.com/damex-el-packages/kubernetes/commits/production
