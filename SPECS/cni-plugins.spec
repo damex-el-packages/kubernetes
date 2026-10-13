@@ -12,6 +12,7 @@ Requires: cni-plugins-main = %{version}
 Requires: cni-plugins-ipam = %{version}
 Requires: cni-plugins-meta = %{version}
 BuildRequires: golang >= 1.26.0, golang < 1.27.0
+BuildRequires: go-rpm-macros
 
 %package -n cni-plugins-main
 Summary: CNI network plugins (main)
@@ -40,28 +41,29 @@ CNI network plugins (meta)
 %build
 cd %{_builddir}/plugins-%{version}
 export GOFLAGS=-buildvcs=false
+export GO111MODULE=on
 go mod download
 # main
-go build -C plugins/main/bridge -o $(pwd)/bridge
-go build -C plugins/main/dummy -o $(pwd)/dummy
-go build -C plugins/main/host-device -o $(pwd)/host-device
-go build -C plugins/main/ipvlan -o $(pwd)/ipvlan
-go build -C plugins/main/loopback -o $(pwd)/loopback
-go build -C plugins/main/macvlan -o $(pwd)/macvlan
-go build -C plugins/main/ptp -o $(pwd)/ptp
-go build -C plugins/main/tap -o $(pwd)/tap
-go build -C plugins/main/vlan -o $(pwd)/vlan
+%gobuild -o $(pwd)/bridge ./plugins/main/bridge
+%gobuild -o $(pwd)/dummy ./plugins/main/dummy
+%gobuild -o $(pwd)/host-device ./plugins/main/host-device
+%gobuild -o $(pwd)/ipvlan ./plugins/main/ipvlan
+%gobuild -o $(pwd)/loopback ./plugins/main/loopback
+%gobuild -o $(pwd)/macvlan ./plugins/main/macvlan
+%gobuild -o $(pwd)/ptp ./plugins/main/ptp
+%gobuild -o $(pwd)/tap ./plugins/main/tap
+%gobuild -o $(pwd)/vlan ./plugins/main/vlan
 # ipam
-go build -C plugins/ipam/dhcp -o $(pwd)/dhcp
-go build -C plugins/ipam/host-local -o $(pwd)/host-local
-go build -C plugins/ipam/static -o $(pwd)/static
+%gobuild -o $(pwd)/dhcp ./plugins/ipam/dhcp
+%gobuild -o $(pwd)/host-local ./plugins/ipam/host-local
+%gobuild -o $(pwd)/static ./plugins/ipam/static
 # meta
-go build -C plugins/meta/bandwidth -o $(pwd)/bandwidth
-go build -C plugins/meta/firewall -o $(pwd)/firewall
-go build -C plugins/meta/portmap -o $(pwd)/portmap
-go build -C plugins/meta/sbr -o $(pwd)/sbr
-go build -C plugins/meta/tuning -o $(pwd)/tuning
-go build -C plugins/meta/vrf -o $(pwd)/vrf
+%gobuild -o $(pwd)/bandwidth ./plugins/meta/bandwidth
+%gobuild -o $(pwd)/firewall ./plugins/meta/firewall
+%gobuild -o $(pwd)/portmap ./plugins/meta/portmap
+%gobuild -o $(pwd)/sbr ./plugins/meta/sbr
+%gobuild -o $(pwd)/tuning ./plugins/meta/tuning
+%gobuild -o $(pwd)/vrf ./plugins/meta/vrf
 
 %install
 %{__install} -d %{buildroot}%{cni_bindir}

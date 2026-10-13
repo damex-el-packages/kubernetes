@@ -8,6 +8,7 @@ License: Apache-2.0
 URL: https://helm.sh
 Source: https://github.com/helm/helm/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires: golang >= 1.26.0, golang < 1.27.0
+BuildRequires: go-rpm-macros
 
 %description
 Helm is a tool for managing Charts. Charts are packages of pre-configured Kubernetes resources.
@@ -17,8 +18,9 @@ Helm is a tool for managing Charts. Charts are packages of pre-configured Kubern
 
 %build
 export GOFLAGS=-buildvcs=false
+export GO111MODULE=on
 go mod download
-go build -C cmd/helm -o $(pwd)/helm
+%gobuild -o $(pwd)/helm ./cmd/helm
 
 %install
 %{__install} -d %{buildroot}%{_bindir}

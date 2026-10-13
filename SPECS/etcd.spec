@@ -10,6 +10,7 @@ Source: https://github.com/etcd-io/etcd/archive/refs/tags/v%{version}.tar.gz#/%{
 %{?systemd_requires}
 Requires(pre): shadow-utils
 BuildRequires: golang >= 1.26.0, golang < 1.27.0
+BuildRequires: go-rpm-macros
 
 %package -n etcd-etcdctl
 Summary: Command line client for etcd
@@ -42,21 +43,24 @@ Summary: Provides metrics for the latest main branch, a given endpoint, or versi
 
 %build
 export GOFLAGS=-buildvcs=false
+export GO111MODULE=on
 go mod download
 go mod download -C server
-go build -C server -o $(pwd)/etcd
+cd server
+%gobuild -o ../etcd .
+cd ..
 go mod download -C etcdctl
-go build -C etcdctl -o $(pwd)/etcd-etcdctl
+cd etcdctl
+%gobuild -o ../etcd-etcdctl .
+cd ..
 go mod download -C etcdutl
-go build -C etcdutl -o $(pwd)/etcd-etcdutl
-go mod download -C tools/benchmark
-go build -C tools/benchmark -o $(pwd)/benchmark
-go mod download -C tools/etcd-dump-db
-go build -C tools/etcd-dump-db -o $(pwd)/etcd-dump-db
-go mod download -C tools/etcd-dump-logs
-go build -C tools/etcd-dump-logs -o $(pwd)/etcd-dump-logs
-go mod download -C tools/etcd-dump-metrics
-go build -C tools/etcd-dump-metrics -o $(pwd)/etcd-dump-metrics
+cd etcdutl
+%gobuild -o ../etcd-etcdutl .
+cd ..
+%gobuild -o $(pwd)/benchmark ./tools/benchmark
+%gobuild -o $(pwd)/etcd-dump-db ./tools/etcd-dump-db
+%gobuild -o $(pwd)/etcd-dump-logs ./tools/etcd-dump-logs
+%gobuild -o $(pwd)/etcd-dump-metrics ./tools/etcd-dump-metrics
 
 %install
 %{__install} -d %{buildroot}%{_sharedstatedir}/etcd

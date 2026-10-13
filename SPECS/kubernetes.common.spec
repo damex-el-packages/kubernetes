@@ -8,6 +8,7 @@ License: Apache-2.0
 URL: https://kubernetes.io
 Source: https://github.com/kubernetes/kubernetes/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires: golang >= 1.26.0, golang < 1.27.0
+BuildRequires: go-rpm-macros
 
 %package -n kube-apiserver
 Summary: services REST operations and provides the frontend to the cluster's shared state through which all other components interact
@@ -54,14 +55,15 @@ Summary: command line tool for converting config files between different Kuberne
 
 %build
 export GOFLAGS=-buildvcs=false
+export GO111MODULE=on
 go mod download
-go build -C cmd/kube-apiserver -o $(pwd)/kube-apiserver
-go build -C cmd/kube-controller-manager -o $(pwd)/kube-controller-manager
-go build -C cmd/kube-proxy -o $(pwd)/kube-proxy
-go build -C cmd/kube-scheduler -o $(pwd)/kube-scheduler
-go build -C cmd/kubelet -o $(pwd)/kubelet
-go build -C cmd/kubectl -o $(pwd)/kubectl
-go build -C cmd/kubectl-convert -o $(pwd)/kubectl-convert
+%gobuild -o $(pwd)/kube-apiserver ./cmd/kube-apiserver
+%gobuild -o $(pwd)/kube-controller-manager ./cmd/kube-controller-manager
+%gobuild -o $(pwd)/kube-proxy ./cmd/kube-proxy
+%gobuild -o $(pwd)/kube-scheduler ./cmd/kube-scheduler
+%gobuild -o $(pwd)/kubelet ./cmd/kubelet
+%gobuild -o $(pwd)/kubectl ./cmd/kubectl
+%gobuild -o $(pwd)/kubectl-convert ./cmd/kubectl-convert
 
 %install
 %{__install} -d %{buildroot}%{_sharedstatedir}/kubernetes
